@@ -1,0 +1,8 @@
+.quiz-question-count {
+    background-color: #fff;
+    color: #0b0e21;
+    display: inline-block;
+    padding: 10px 25px;
+    font-size: 20px;
+    font-weight: 600;
+}
