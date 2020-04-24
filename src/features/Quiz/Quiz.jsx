@@ -52,7 +52,7 @@ class Quiz extends Component {
         const options = [...quizDataAPI[currentIndex].incorrect_answers, quizDataAPI[currentIndex].correct_answer];
         return options
             .map((a) => ({ sort: Math.random(), value: a }))
-            .sort((a, b) => a.sort - b.sort) 
+            .sort((a, b) => a.sort - b.sort)
             .map((a) => a.value)
     }
 
@@ -124,7 +124,7 @@ class Quiz extends Component {
                     </button>
                 </div>
 
-                {/* <Footer /> */}
+                <Footer />
             </div>
         )
     }

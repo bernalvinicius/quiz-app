@@ -1,15 +1,4 @@
-/* p {
-    border: 1px solid black;
-    padding: 5px;
-    cursor: pointer;
-} */
-
-.selected {
-    background: yellow !important;
-}
-
 .row {
-    /* border: 1px solid black; */
     max-width: 750px;
     max-height: 750px;
 }

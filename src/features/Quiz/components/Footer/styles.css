@@ -1,0 +1,28 @@
+.quiz-footer {
+    background-color: #0b0e21;
+    color: white;
+    letter-spacing: 1px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.quiz-footer p {
+    margin: 0;
+}
+
+.quiz-footer .small {
+    margin-bottom: 10px;
+}
+
+.quiz-footer span {
+    color: crimson;
+}
+
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
