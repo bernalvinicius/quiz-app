@@ -3,6 +3,8 @@ import Header from './components/Header';
 import Content from './components/Content';
 import Footer from './components/Footer';
 import FinishQuiz from './components/Modal/FinishQuiz';
+import StartQuiz from './components/Modal/StartQuiz';
+import { Modal, Button } from 'react-bootstrap';
 import './style.css';
 
 import { getQuiz } from '../../api';
@@ -16,7 +18,8 @@ class Quiz extends Component {
         disable: true, // variavel que define quando o botão deve aparecer
         userAnswer: null, // resposta que o usuario da para cada pergunta
         score: 0, // score que contabiliza os acertos do usuário
-        quizDataAPI: [] // dados que vem da API
+        quizDataAPI: [], // dados que vem da API
+        show: false, // Inicianilização do Modal StartQuiz
     }
 
     componentDidMount() {
@@ -88,12 +91,21 @@ class Quiz extends Component {
         })
     }
 
+    // ativar ou desativar modal
+    handleModal() {
+        console.log('entrou aqui')
+        this.setState({ show: !this.state.show })
+    }
 
     render() {
-        const { question, currentIndex, answers, userAnswer, correct_answer, disable, quizDataAPI } = this.state;
+        const { question, currentIndex, answers, userAnswer, correct_answer, disable, quizDataAPI, show } = this.state;
+
+        console.log('aaaaa', show)
 
         return (
             <div className='row'>
+
+                {/* <FinishQuiz /> */}
 
                 {/* componente que renderiza o index da questão e também a pergunta da vez */}
                 <Header
@@ -125,6 +137,19 @@ class Quiz extends Component {
                 </div>
 
                 <Footer />
+
+                <Button onClick={() => { this.handleModal() }} >Open Modal</Button>
+                <Modal show={show}>
+                    <Modal.Header>Header do Modal</Modal.Header>
+                    <Modal.Body>Body do Modal</Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={() => { this.handleModal() }}>Fechar Modal</Button>
+                    </Modal.Footer>
+                </Modal>
+
+                {/* <StartQuiz show={show} /> */}
+
+
             </div>
         )
     }
