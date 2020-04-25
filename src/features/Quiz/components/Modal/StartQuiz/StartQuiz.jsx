@@ -1,40 +1,48 @@
 import React, { useState } from 'react'
-import { Modal, Button } from 'react-bootstrap';
+import Modal from '@material-ui/core/Modal';
 import './styles.css';
 
 const StartQuiz = () => {
 
     // Inicialmente isOpen vem com o estado pré-definido como falso
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
-    // Função chamada ao clicar em Open Modal
-    const showModal = () => {
+    const handleOpen = () => {
         setIsOpen(true);
     };
 
-    // Função chamada ao fechar modal
-    const hideModal = () => {
+    const handleClose = () => {
         setIsOpen(false);
     };
 
     return (
-        <Modal show={isOpen} onHide={hideModal}>
-            <Modal.Header className='header-start-modal'>Welcome To Quiz</Modal.Header>
-            <Modal.Body>
-                <p>This is a quiz application built using ReactJS.</p>
-                <p>Currently, it is loaded with questions from the Trivia API, with each page update the questions are changed, but they all belong to the Computer Science category.</p>
-                <p>It will dynamically load the question->answers pair and upload them into the components.</p>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button style={{ backgroundColor: "red" }} onClick={hideModal}>Start The Quiz</Button>
-            </Modal.Footer>
-        </Modal>
+        <div>
+            {/* <button type='button' onClick={handleOpen}>Open Modal</button> */}
+            <Modal
+                open={isOpen}
+                // onClose={handleClose}
+            // style={{backgroundColor: 'red'}}
+            >
+                <div className='box'>
+                    <div className='modal-start-quiz'>
+                        <div className="modal-header">
+                            <p>Welcome To Quiz</p>
+                        </div>
+                        <div className="modal-body">
+                            <p>This is a quiz application built using ReactJS.</p>
+                            <p>Currently, it is loaded with questions from the Trivia API, with each page update the questions are changed, but they all belong to the Computer Science category.</p>
+                            <p>It will dynamically load the question->answers pair and upload them into the components.</p>
+                        </div>
+                        <div className="modal-footer">
+                            <button onClick={handleClose} className='submit-button'>
+                                Start The Quiz
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+        </div>
     )
 }
-
-/* 
-Corrigir Warning:
-- findDOMNode is deprecated in StrictMode. findDOMNode was passed an instance of Transition which is inside StrictMode.
-*/
 
 export default StartQuiz;

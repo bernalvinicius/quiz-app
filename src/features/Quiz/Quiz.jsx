@@ -4,7 +4,7 @@ import Content from './components/Content';
 import Footer from './components/Footer';
 import FinishQuiz from './components/Modal/FinishQuiz/FinishQuiz';
 import StartQuiz from './components/Modal/StartQuiz/StartQuiz';
-import { Modal, Button } from 'react-bootstrap';
+// import { Modal, Button } from 'react-bootstrap';
 import './style.css';
 
 import { getQuiz } from '../../api';
@@ -128,7 +128,7 @@ class Quiz extends Component {
                     </button>
                 </div>
 
-                {/* <Footer /> */}
+                <Footer />
 
             </div>
         )
