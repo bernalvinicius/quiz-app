@@ -4,24 +4,20 @@ import './styles.css';
 
 const StartQuiz = () => {
 
-    // Inicialmente isOpen vem com o estado pré-definido como falso
+    // Inicialmente isOpen vem com o estado pré-definido como true
     const [isOpen, setIsOpen] = useState(true);
 
-    const handleOpen = () => {
-        setIsOpen(true);
-    };
-
+    // Quando clicar em Start o modal fica como false
     const handleClose = () => {
         setIsOpen(false);
     };
 
     return (
         <div>
-            {/* <button type='button' onClick={handleOpen}>Open Modal</button> */}
             <Modal
                 open={isOpen}
-                // onClose={handleClose}
-            // style={{backgroundColor: 'red'}}
+            // Se onClose ficar ativo, quando o usuario clicar fora do modal, é como se estivesse clicando em Start Quiz
+            // onClose={handleClose}
             >
                 <div className='box'>
                     <div className='modal-start-quiz'>

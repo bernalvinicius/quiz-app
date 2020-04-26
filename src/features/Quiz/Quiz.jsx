@@ -4,7 +4,6 @@ import Content from './components/Content';
 import Footer from './components/Footer';
 import FinishQuiz from './components/Modal/FinishQuiz/FinishQuiz';
 import StartQuiz from './components/Modal/StartQuiz/StartQuiz';
-// import { Modal, Button } from 'react-bootstrap';
 import './style.css';
 
 import { getQuiz } from '../../api';
@@ -19,6 +18,7 @@ class Quiz extends Component {
         userAnswer: null, // resposta que o usuario da para cada pergunta
         score: 0, // score que contabiliza os acertos do usuário
         quizDataAPI: [], // dados que vem da API
+        quizEnd: false, // variavel que ira ativar o modal de finalização do quiz
     }
 
     componentDidMount() {
@@ -80,6 +80,7 @@ class Quiz extends Component {
             userAnswer: null, // o valor de resposta do usuario fica nulo até que ele selecione uma nova resposta
             disable: true, // enquanto o usario não selecionar uma alternativa o botão fica oculto
         })
+
     }
 
     // verifica se o usuario clicou em uma alternativa, caso sim, o botão de next question ou finish quiz aparece
@@ -90,14 +91,49 @@ class Quiz extends Component {
         })
     }
 
+    // função para finalizar o quiz
+    finishQuizHandler = () => {
+        const { currentIndex, quizDataAPI } = this.state;
+        // console.log('finishQuiz currentIndex', currentIndex)
+        // console.log('finishQuiz quizData', quizDataAPI)
+        if (currentIndex === quizDataAPI.length - 1) {
+            this.setState({
+                quizEnd: true
+            });
+        }
+    }
+
+    // função para reinicializar o quiz
+    restartQuiz = () => {
+        this.setState({
+            currentIndex: 0, // estado inicial da primeira pergunta
+            disable: true, // variavel que define quando o botão deve aparecer
+            score: 0, // score que contabiliza os acertos do usuário
+            quizEnd: true // variavel que ira ativar o modal de finalização do quiz
+        })
+
+        // chamando o componentDidMount para fazer uma nova chamada a API
+        this.componentDidMount();
+    }
+
     render() {
-        const { question, currentIndex, answers, userAnswer, correct_answer, disable, quizDataAPI } = this.state;
+        const {
+            question,
+            currentIndex,
+            answers,
+            userAnswer,
+            correct_answer,
+            disable,
+            quizDataAPI,
+            score,
+            quizEnd
+        } = this.state;
 
         return (
             <div className='row'>
 
+                {/* Modal de Inicianilização do Quiz */}
                 <StartQuiz />
-                {/* <FinishQuiz /> */}
 
                 {/* componente que renderiza o index da questão e também a pergunta da vez */}
                 <Header
@@ -117,18 +153,46 @@ class Quiz extends Component {
                     checkAnswer={this.checkAnswer} // função que verifica se o usuario clicou e onde clicou
                 />
 
-                {/* Validação feita para os botões */}
-                <div id="submit">
-                    <button
-                        className='submit-button'
-                        style={{ display: disable ? 'none' : 'block' }}
-                        onClick={this.nextQuestion}
-                    >
-                        {currentIndex < quizDataAPI.length - 1 ? 'Next Question' : 'Finish Quiz'}
-                    </button>
-                </div>
+                {/* Apesar dos botões serem "iguais", dupliquei o codigo pq as funções que passam no onclick são diferentes */}
+                {/* Botão enquanto não é a ultima questão */}
+                {
+                    currentIndex < quizDataAPI.length - 1 &&
+                    <div id="submit">
+                        <button
+                            className='submit-button'
+                            style={{ display: disable ? 'none' : 'block' }}
+                            onClick={this.nextQuestion}
+                        >
+                            Next Question
+                        </button>
+                    </div>
+                }
+
+                {/* Botão para a ultima questão */}
+                {
+                    currentIndex === quizDataAPI.length - 1 &&
+                    <div id="submit">
+                        <button
+                            className='submit-button'
+                            style={{ display: disable ? 'none' : 'block' }}
+                            onClick={this.finishQuizHandler}
+                        >
+                            Finish Quiz
+                        </button>
+                    </div>
+                }
 
                 <Footer />
+
+                {/* Modal de Finalização do Quiz */}
+                {
+                    quizEnd &&
+                    <FinishQuiz
+                        score={score} // enviar score para mostrar quantos acertos o usuario teve
+                        quizData={quizDataAPI} // envio o quizData para o usário saber o tamanho total do array, e comparar com o score
+                        restartQuiz={this.restartQuiz} // função para reinicar o quiz
+                    />
+                }
 
             </div>
         )
