@@ -94,8 +94,7 @@ class Quiz extends Component {
     // função para finalizar o quiz
     finishQuizHandler = () => {
         const { currentIndex, quizDataAPI } = this.state;
-        // console.log('finishQuiz currentIndex', currentIndex)
-        // console.log('finishQuiz quizData', quizDataAPI)
+
         if (currentIndex === quizDataAPI.length - 1) {
             this.setState({
                 quizEnd: true
