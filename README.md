@@ -3,8 +3,11 @@
 ###### If you want to take a look at the project, it is [here](https://myquiz-react-app.netlify.app/).
 ## Why?
 This project is part of my personal portfolio, I did it only with the intention of improving my skills in React.js, so, I'll be happy if you could provide me any feedback about the project, code, structure or anything that you can report that could make me a better developer!
+
 Email-me: vini_bernal@hotmail.com
+
 Connect with me at [LinkedIn](https://www.linkedin.com/in/vin%C3%ADcius-bernal-19254027/)
+
 ## Functionalities
 - The user can start the test by pressing a button.
 - The user can see a question with 04 possible answers.
@@ -32,7 +35,9 @@ _or_
 $ npm install
 ```
 **Running**
+
 With all dependencies installed and the environment properly configured, you can now run the app:
+
 ```
 $ npm start
 ```
